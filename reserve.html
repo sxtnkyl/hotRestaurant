@@ -32,7 +32,41 @@
             <label for="exampleFormControlInput1">Unique ID</label>
             <input type="input" class="form-control" id="input4" placeholder="5">
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Make Reservation</button>
+        <button type="submit" class="btn btn-primary mb-2" id = "submitBtn">Make Reservation</button>
       </form>
 </body>
+<script type="text/javascript">
+    const submitBtn = document.getElementById("submitBtn");
+
+    submitBtn.addEventListener('click', () => {
+        let resName = document.getElementById('input1');
+        let resNumber = document.getElementById('input2');
+        let resEmail = document.getElementById('input3');
+        let resId = document.getElementById('input4');
+
+        let newRes = {
+            name: resName,
+            number: resNumber,
+            email: resEmail,
+            id: resId,
+        };
+
+        fetch('/api/reservationList/:item', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newRes),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('add.html', data);
+            alert(`Adding character: ${data.name}`);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+    })
+
+</script>
 </html>
