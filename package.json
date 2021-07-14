@@ -1,0 +1,26 @@
+{
+  "name": "hotrestaurant",
+  "version": "1.0.0",
+  "description": "group activity with heroku",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxtnkyl/hotRestaurant.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sxtnkyl/hotRestaurant/issues"
+  },
+  "homepage": "https://github.com/sxtnkyl/hotRestaurant#readme"
+}
