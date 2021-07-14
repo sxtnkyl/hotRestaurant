@@ -60,7 +60,7 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('add.html', data);
+            console.log(data.response.status);
             alert(`Reservation successful: ${data.name}`);
           })
           .catch((error) => {
