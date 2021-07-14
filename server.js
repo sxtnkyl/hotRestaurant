@@ -52,10 +52,16 @@ app.post("/api/reservation", (req, res) => {
 
 app.delete("/api/deleteAll", (req, res) => {
   //TODO: delete reservationList
+  const reservationList = [
+    {
+      //reservation data
+    },
+  ];
 });
 
 app.delete("/api/singleReservation", (req, res) => {
   //TODO: find item in reservationList and remove it
+  
 });
 
 // Starts the server to begin listening
