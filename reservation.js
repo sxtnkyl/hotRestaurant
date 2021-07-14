@@ -1,7 +1,3 @@
-let reserveName = document.querySelector('').value.trim();
-let reservePhone = document.querySelector('').value.trim();
-let reserveEmail = document.querySelector('').value.trim();
-let reserveId = document.querySelector('').value.trim();
 
 let newReservation = {
     name: reserveName,
@@ -10,10 +6,17 @@ let newReservation = {
     ID: reserveId
 }
 
-fetch('/api/characters', {
+fetch('/api/reservationList', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(newCharacter),
+    body: JSON.stringify(newReservation),
+  }).then((response) => response.json())
+  .then((data) => {
+    console.log('reserve.html', data);
+    alert(`Adding resercation: ${data.ID}`);
   })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
