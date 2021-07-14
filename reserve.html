@@ -51,7 +51,7 @@
             id: resId,
         };
 
-        fetch('/api/reservationList/:item', {
+        fetch('/api/reservation', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -61,10 +61,11 @@
           .then((response) => response.json())
           .then((data) => {
             console.log('add.html', data);
-            alert(`Adding character: ${data.name}`);
+            alert(`Reservation successful: ${data.name}`);
           })
           .catch((error) => {
             console.error('Error:', error);
+            alert(`There was an error making a reservation for: ${data.name} please try again`);
           });
     })
 
