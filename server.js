@@ -23,41 +23,61 @@ const reservationList = [
 ];
 
 // Routes
-
-// Basic route that sends the user first to the AJAX Page
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "homePage.html")));
 
 app.get("/form", (req, res) => res.sendFile(path.join(__dirname, "form.html")));
 
-// Displays all characters
-app.get("/api/reservationList", (req, res) => res.json(reservationList));
+app.get("/tables", (req, res) =>
+  res.sendFile(path.join(__dirname, "tables.html"))
+);
 
-// Not needed but here it is
-app.get("/api/reservationList/:item", (req, res) => {
-  const item = req.params.item;
-  //string for unniqueID
-  console.log(item);
+// Displays all reservations
+app.get("/api/reservationList", (req, res) =>
+  res.status(200).json(reservationList)
+);
 
-  let itemIndex = reservationList.indexOf(); //TODO: write logic to find uniqueID in reservationList
+// BONUS POINTS
+// app.get("/api/reservationList/:item", (req, res) => {
+//   const item = req.params.item;
+//   //string for unniqueID
+//   console.log(item);
 
-  return res.json(false);
-});
+//   let itemIndex = reservationList.indexOf(); //TODO: write logic to find uniqueID in reservationList
+
+//   return res.json(false);
+// });
 
 // Create New Reservation
 app.post("/api/reservation", (req, res) => {
   const newReservation = req.body;
-  reservationList.push(newReservation);
-  res.json("reservation added!");
+  let { name, number, email, id } = newReservation;
+  let obj = {
+    name: name,
+    number: number,
+    email: email,
+    id: id,
+  };
+  reservationList.push(obj);
+  res.status(200).json("reservation added!");
 });
 
 app.delete("/api/deleteAll", (req, res) => {
   //TODO: delete reservationList
+  reservationList = [];
+  res.status(200);
 });
 
-app.delete("/api/singleReservation", (req, res) => {
-  //TODO: find item in reservationList and remove it
+app.delete("/api/singleReservation/:uniqueID", (req, res) => {
+  let resId = req.params.uniqueID;
+  for (let i = 0; i < reservationList.length; i++) {
+    let current = reservationList[i];
+    if (current.id === resId) {
+      //remove from list
+      reservationList.splice(i, 1);
+      return res.status(200);
+    }
+  }
 });
 
 // Starts the server to begin listening
-
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
